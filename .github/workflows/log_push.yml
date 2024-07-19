@@ -1,0 +1,18 @@
+on: push
+
+jobs:
+  echo-input:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - run: npm ci
+      # or one-off:
+      # - run: npm install execa
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { logging } = await import('${{ github.workspace }}/test.mjs');
+            logging({ github, context, core });
