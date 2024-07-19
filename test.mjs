@@ -1,5 +1,5 @@
-export function logging({ github, context, core }) {
-  const util = require('util');
+import { inspect } from 'node:util';
 
-  console.log(util.inspect({ github, context, core }, { showHidden: false, depth: null, colors: true }))
+export function logging({ github, context, core }) {
+  console.log(inspect({ github, context, core }, { showHidden: false, depth: null, colors: true }))
 }
