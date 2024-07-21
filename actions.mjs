@@ -9,7 +9,7 @@ export function getActionInfo({ context, root, branch, repoName }) {
   let projectRoot = getProjectRootPath(root);
   let ref = context?.ref ?? context?.payload?.ref;
   let change = getChange(branch.replace('refs/heads/', ''), projectRoot);
-  let packages = getChangedPackages('main', projectRoot);
+  let packages = getChangedPackages('origin/main', projectRoot);
 
   log(getPackages(projectRoot));
 
