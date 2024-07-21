@@ -1,4 +1,4 @@
-import { getProjectRootPath, getChange, getChanges, getChangedPackages } from '@websublime/workspace-tools';
+import { getProjectRootPath, getChange, getPackages, getChangedPackages } from '@websublime/workspace-tools';
 import { inspect } from 'node:util';
 
 function log(...args) {
@@ -10,6 +10,8 @@ export function getActionInfo({ context, root, branch, repoName }) {
   let ref = context?.ref ?? context?.payload?.ref;
   let change = getChange(branch.replace('refs/heads/', ''), projectRoot);
   let packages = getChangedPackages('main', projectRoot);
+
+  log(getPackages(projectRoot));
 
   return {
     branch,
