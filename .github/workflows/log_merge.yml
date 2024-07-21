@@ -6,7 +6,9 @@ jobs:
   echo-input:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: '20.x'
@@ -16,5 +18,12 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
-            const { logging } = await import('${{ github.workspace }}/test.mjs');
-            logging({ github, context, core });
+            const root = '${{ github.workspace }}';
+            const branch = '${{ github.head_ref || github.ref_name }}';
+            const repoName = '${{ github.repository }}';
+
+            const { getActionInfo } = await import('${{ github.workspace }}/actions.mjs');
+            const { log } = await import('${{ github.workspace }}/test.mjs');
+
+            log(getActionInfo({ context, root, branch, repoName }));
+            log({ context, root });
