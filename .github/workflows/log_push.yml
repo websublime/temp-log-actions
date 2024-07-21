@@ -21,9 +21,10 @@ jobs:
           script: |
             const root = '${{ github.workspace }}';
             const branch = '${{ github.head_ref || github.ref_name }}';
+            const repoName = '${{ github.repository }}';
 
             const { getActionInfo } = await import('${{ github.workspace }}/actions.mjs');
             const { log } = await import('${{ github.workspace }}/test.mjs');
 
-            log(getActionInfo({ context, root, branch }));
+            log(getActionInfo({ context, root, branch, repoName }));
             log({ context, root });
