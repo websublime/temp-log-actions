@@ -7,7 +7,7 @@ function log(...args) {
 
 export function getActionInfo({ context, root }) {
   let projectRoot = getProjectRootPath(root);
-  let ref = context?.payload?.ref ?? context?.ref;
+  let ref = context?.ref ?? context?.payload?.ref;
   let change = getChange(ref.replace('refs/heads/', ''), projectRoot);
   let changes = getChanges(projectRoot);
 

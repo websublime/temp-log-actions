@@ -18,4 +18,7 @@ jobs:
           script: |
             const root = '${{ github.workspace }}';
             const { getActionInfo } = await import('${{ github.workspace }}/actions.mjs');
-            console.log(getActionInfo({ context, root }));
+            const { log } = await import('${{ github.workspace }}/test.mjs');
+
+            log(getActionInfo({ context, root }));
+            log({ context, root });

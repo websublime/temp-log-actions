@@ -1,4 +1,5 @@
-import { initChanges, addChange, Bump } from '@websublime/workspace-tools';
+import { inspect } from 'node:util';
 
-//initChanges(process.cwd());
-addChange({ deploy: [], package: '@scope/package-a', releaseAs: Bump.Patch }, process.cwd());
+export function log(...args) {
+  console.log(inspect(args, { showHidden: false, depth: null, colors: true }))
+}
