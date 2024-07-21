@@ -14,6 +14,9 @@ jobs:
       - name: Print env variables
         shell: bash
         run: printenv
+      - name: Test Commands
+        shell: bash
+        run: git --no-pager diff --name-only main..
       # or one-off:
       # - run: npm install execa
       - uses: actions/github-script@v7
