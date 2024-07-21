@@ -5,13 +5,14 @@ function log(...args) {
   console.log(inspect(args, { showHidden: false, depth: null, colors: true }))
 }
 
-export function getActionInfo({ context, root }) {
+export function getActionInfo({ context, root, branch }) {
   let projectRoot = getProjectRootPath(root);
   let ref = context?.ref ?? context?.payload?.ref;
-  let change = getChange(ref.replace('refs/heads/', ''), projectRoot);
+  let change = getChange(branch.replace('refs/heads/', ''), projectRoot);
   let changes = getChanges(projectRoot);
 
   return {
+    branch,
     change,
     changes,
     projectRoot,
