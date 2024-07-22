@@ -16,6 +16,7 @@ export function getActionInfo({ context, root, branch, repoName }) {
   let ref = context?.ref ?? context?.payload?.ref;
   let headRef = context?.payload?.pull_request?.head?.ref ?? branch;
   let isMerge = Boolean(context?.payload?.pull_request?.merged);
+  let title = context?.payload?.pull_request?.title;
 
   if (isMerge && headRef) {
     removeChange(headRef, projectRoot);
@@ -25,6 +26,7 @@ export function getActionInfo({ context, root, branch, repoName }) {
   let packages = getChangedPackages("origin/main", projectRoot);
 
   return {
+    title,
     branch,
     change,
     packages,
