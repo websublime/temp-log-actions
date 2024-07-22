@@ -41,6 +41,7 @@ export function getActionInfo({ context, root, branch, repoName }) {
     eventName: context?.eventName,
     headRef,
     isMerge,
+    hasPackagesChanges: packages.length > 0,
     repoName,
   };
 }
