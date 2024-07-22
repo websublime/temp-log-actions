@@ -13,7 +13,7 @@ function log(...args) {
 export function getActionInfo({ context, root, branch, repoName }) {
   let projectRoot = getProjectRootPath(root);
   let ref = context?.ref ?? context?.payload?.ref;
-  let headRef = context?.payload?.pull_request?.head?.ref;
+  let headRef = context?.payload?.pull_request?.head?.ref ?? branch;
   let isMerge = Boolean(context?.payload?.pull_request?.merged);
 
   if (isMerge && headRef) {
@@ -28,8 +28,11 @@ export function getActionInfo({ context, root, branch, repoName }) {
     change,
     packages,
     projectRoot,
-    commitIdBefore: context?.payload?.before,
-    commitIdAfter: context?.payload?.after,
+    commitIdBefore:
+      context?.payload?.before ?? context?.payload?.pull_request?.head?.sha,
+    commitIdAfter:
+      context?.payload?.after ??
+      context?.payload?.pull_request?.merge_commit_sha,
     ref,
     eventName: context?.eventName,
     headRef,

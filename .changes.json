@@ -1,1 +1,1 @@
-{"message":"chore(release): release new version","changes":{"feat/action-info":[{"package":"@scope/package-a","release_as":"Patch","deploy":[]}]}}
+{ "message": "chore(release): release new version", "changes": {} }
