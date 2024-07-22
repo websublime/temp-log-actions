@@ -3,6 +3,7 @@ import {
   getChange,
   removeChange,
   getChangedPackages,
+  gitCurrentSha,
 } from "@websublime/workspace-tools";
 import { inspect } from "node:util";
 
@@ -32,7 +33,8 @@ export function getActionInfo({ context, root, branch, repoName }) {
       context?.payload?.before ?? context?.payload?.pull_request?.head?.sha,
     commitIdAfter:
       context?.payload?.after ??
-      context?.payload?.pull_request?.merge_commit_sha,
+      context?.payload?.pull_request?.merge_commit_sha ??
+      gitCurrentSha(projectRoot),
     ref,
     eventName: context?.eventName,
     headRef,
